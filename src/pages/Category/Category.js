@@ -5,8 +5,11 @@ import CardMedia from "@material-ui/core/CardMedia";
 import { withStyles } from "@material-ui/core/styles";
 import { styles } from "./CategoryStyle";
 import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
+
 import pic1 from "../../images/lacenoback3collloor.png";
+import pic1a from "../../images/final.png";
 import pic2 from "../../images/minified (2).jpg";
 import pic3 from "../../images/minified (3).jpg";
 import pic4 from "../../images/minified (4).jpg";
@@ -27,14 +30,14 @@ class Category extends Component {
       ];
     }
     return [
-      "All Catergories",
-      "Chiganvy",
-      "Dominion",
-      "Holland Wax",
-      "Aunty K",
-      "Bimraj",
-      "Delight",
-      "Others"
+      { name: "All Catergories", pic: pic1a },
+      { name: "Chiganvy", pic: pic2 },
+      { name: "Dominion", pic: pic3 },
+      { name: "Holland Wax", pic: pic4 },
+      { name: "Aunty K", pic: pic7 },
+      { name: "Bimraj", pic: pic3 },
+      { name: "Delight", pic: pic2 },
+      { name: "Others", pic: pic4 }
     ];
   };
 
@@ -44,11 +47,17 @@ class Category extends Component {
     console.log(categorys);
     return (
       <>
-        <Container className={classes.defaultmagin}>
+        <Container maxWidth="sm" className={classes.defaultmagin}>
           {" "}
-          <Grid container spacing={3}>
+          <Grid
+            container
+            spacing={2}
+            sm={12}
+            md={12}
+            className={classes.defaultmagin}
+          >
             {categorys.map((category, i) => (
-              <Grid key={i} item xs={12}>
+              <Grid key={i} item xs={12} md={6}>
                 <Link to={`/products/category/${category.name}`}>
                   <Card className={classes.card}>
                     <CardMedia
@@ -56,7 +65,19 @@ class Category extends Component {
                       image={category.pic}
                       title="Contemplative Reptile"
                     />
-                    {category.name}
+
+                    <div style={styles.overlay2}>
+                      <div style={styles.overlay}>
+                        <Typography
+                          className={classes.HeadingText}
+                          // gutterBottom
+                          variant="h6"
+                          component="h5"
+                        >
+                          {category.name}
+                        </Typography>
+                      </div>
+                    </div>
                   </Card>
                 </Link>
               </Grid>

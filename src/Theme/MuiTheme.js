@@ -40,6 +40,10 @@ const theme = {
   inputMargin: {
     paddingTop: 10,
     paddingBottom: 5
+  },
+  defaultmagin: {
+    marginTop: 70,
+    marginBottom: 70
   }
 };
 

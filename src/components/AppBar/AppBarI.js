@@ -14,6 +14,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
+  Navhead: {
+    borderRadius: "0px 0px 15px 15px"
+  },
   menuButton: {
     marginRight: theme.spacing(2)
   },
@@ -26,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   },
   search: {
     position: "relative",
-    borderRadius: theme.shape.borderRadius,
+    borderRadius: "30px 30px 30px 30px",
     backgroundColor: fade(theme.palette.common.white, 0.15),
     "&:hover": {
       backgroundColor: fade(theme.palette.common.white, 0.25)
@@ -65,21 +68,25 @@ const useStyles = makeStyles(theme => ({
 
 export default function SearchAppBar() {
   const classes = useStyles();
+  console.log(window.location);
 
   return (
     <div className={classes.root}>
-      <AppBar>
+      <AppBar className={classes.Navhead}>
         {" "}
         <Toolbar position="fixed">
           <Toolbar>
-            <IconButton
+            <Typography>
+              <small>Easy Shop</small>
+            </Typography>
+            {/* <IconButton
               edge="start"
               className={classes.menuButton}
               color="inherit"
               aria-label="open drawer"
             >
               <MenuIcon />
-            </IconButton>
+            </IconButton> */}
             <Typography className={classes.title} variant="h6" noWrap>
               Easy Shop
             </Typography>

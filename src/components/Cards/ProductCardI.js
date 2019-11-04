@@ -13,6 +13,22 @@ const useStyles = makeStyles({
   },
   media: {
     height: 140
+  },
+  CardText: {
+    fontWeight: "light",
+    fontSize: 11,
+    fontFamily: " Montserrat",
+    fontStyle: " normal",
+    fontWeight: " normal",
+    fontSize: "10px",
+    // line-height: 12px;
+    paddingBottom: 10,
+    marginTop: -40,
+    transform: "translateY(30px)",
+    opacity: 0.6
+  },
+  CardText2: {
+    transform: "translateY(20px)"
   }
 });
 
@@ -26,11 +42,11 @@ export default function MediaCard({ image }) {
         image={image}
         title="Contemplative Reptile"
       />
-      <CardContent className={classes.CardCont}>
-        <Typography gutterBottom variant="p" component="h4">
-          Chiganvy
-        </Typography>
-        <Typography variant="p" component="h6">
+      <CardContent fontWeight="fontWeightLight" className={classes.CardCont}>
+        <div gutterBottom className={classes.CardText}>
+          Chiganvy Ankara Fabric blue pattern
+        </div>
+        <Typography variant="p" component="h4" className={classes.CardText2}>
           NGN ₦5000
         </Typography>
       </CardContent>

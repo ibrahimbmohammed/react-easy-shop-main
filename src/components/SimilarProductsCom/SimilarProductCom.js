@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.background.paper
   },
   gridList: {
-    width: 250,
+    width: 300,
     height: 150
   },
   icon: {
@@ -29,8 +29,8 @@ export default function TitlebarGridList({ tileData }) {
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={180} className={classes.gridList}>
-        <GridListTile key="Subheader" cols={2} style={{ height: "auto" }}>
+      <GridList cellHeight={250} className={classes.gridList}>
+        <GridListTile key="Subheader" cols={4} style={{ height: "auto" }}>
           {/* <ListSubheader component="div">December</ListSubheader> */}
         </GridListTile>
         {tileData.map(tile => (

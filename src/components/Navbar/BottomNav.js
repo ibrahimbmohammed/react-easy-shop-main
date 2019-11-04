@@ -2,18 +2,21 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import FolderIcon from "@material-ui/icons/Folder";
-import RestoreIcon from "@material-ui/icons/Restore";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import LocationOnIcon from "@material-ui/icons/LocationOn";
+import HomeRounded from "@material-ui/icons/HomeRounded";
+import MenuRounded from "@material-ui/icons/MenuRounded";
+import ShoppingIcon from "@material-ui/icons/ShoppingCartOutlined";
+import PersonRoundedIcon from "@material-ui/icons/PersonRounded";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
     width: "100%",
     position: "fixed",
     bottom: "0",
+    marginBottom: -1,
     boxShadow: " 1px -1px 3px rgba(0, 0, 0, 0.25)",
-    borderRadius: " 10px 10px 0px 0px"
+    borderRadius: " 10px 10px 0px 0px",
+    zIndex: 10
   }
 });
 
@@ -32,25 +35,34 @@ export default function LabelBottomNavigation() {
       className={classes.root}
     >
       <BottomNavigationAction
-        label="Recents"
+        label="Home"
         value="recents"
-        icon={<RestoreIcon />}
+        icon={<HomeRounded />}
+        component={Link}
+        to="/"
       />
       <BottomNavigationAction
-        label="Favorites"
+        label="Categories"
         value="favorites"
-        icon={<FavoriteIcon />}
+        icon={<MenuRounded />}
+        component={Link}
+        to="/Categories"
       />
       <BottomNavigationAction
-        label="Nearby"
+        label="Cart"
         value="nearby"
-        icon={<LocationOnIcon />}
+        icon={<ShoppingIcon />}
+        component={Link}
+        to="/Cart"
       />
       <BottomNavigationAction
-        label="Folder"
+        label="Account"
         value="folder"
-        icon={<FolderIcon />}
+        icon={<PersonRoundedIcon />}
+        component={Link}
+        to="/SignIn"
       />
     </BottomNavigation>
   );
 }
+//   <Link to={`/product/${name}`} name={name}>

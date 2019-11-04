@@ -13,7 +13,11 @@ import pic from "../../images/minified (4).jpg";
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
-    border: "2px solid black"
+    border: "2px solid black",
+    marginBottom: 10,
+    "@media (min-width:1024px)": {
+      height: 150
+    }
   },
   check: {
     marginTop: -30,
@@ -23,13 +27,33 @@ const useStyles = makeStyles(theme => ({
     marginTop: -50,
 
     transform: "translateY(-10px)",
-    transform: "translateX(30px)"
+    transform: "translateX(30px)",
+    "@media (min-width:1024px)": {
+      transform: "translate(25px,-50px)"
+    }
   },
   img: {
     margin: "auto",
     display: "block",
     maxWidth: "100%",
-    maxHeight: "100%"
+    maxHeight: "100%",
+    "@media (min-width:1024px)": {
+      transform: "translate(-35px ,-21px)",
+      maxWidth: 150,
+      maxHeight: 150
+    }
+  },
+  cartText: {
+    "@media (min-width:1024px)": {
+      fontSize: 18,
+      fontWeight: "lighter",
+      transform: "translateX(-40px)"
+    }
+  },
+  cartText2: {
+    "@media (min-width:1024px)": {
+      transform: "translateX(-40px)"
+    }
   }
 }));
 
@@ -40,7 +64,7 @@ export default function PaperSheet() {
     <>
       <Paper className={classes.root}>
         <Grid container spacing={1} xs={12}>
-          <Grid item xs={4}>
+          <Grid item xs={4} md={4}>
             <img className={classes.img} alt="complex" src={pic} />
             {/* <CardMedia
               className={classes.media}
@@ -48,18 +72,28 @@ export default function PaperSheet() {
               title="Contemplative Reptile"
             /> */}
           </Grid>
-          <Grid item direction="column" xs={4}>
+          <Grid item direction="column" xs={4} md={4}>
             {" "}
-            <Typography gutterBottom variant="p" component="h5">
+            <Typography
+              className={classes.cartText}
+              gutterBottom
+              variant="p"
+              component="h5"
+            >
               This is a sheet of paper.
             </Typography>
-            <Typography variant="p" component="h5">
+            <Typography
+              className={classes.cartText2}
+              variant="p"
+              component="h3"
+            >
               NGN ₦5000
             </Typography>
           </Grid>
           <Grid
             item
             xs={4}
+            md={4}
             container
             className={classes.check}
             alignItems="flex-start"

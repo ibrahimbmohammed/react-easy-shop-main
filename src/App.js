@@ -6,6 +6,8 @@ import SingleProduct from "./pages/SinglePage/SingleProduct";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
 import Cart from "./pages/Cart/Cart";
+import AppBar from "./components/AppBar/AppBarI";
+import AppBarI from "./components/AppBar/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import BottomNav from "./components/Navbar/BottomNav";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
@@ -14,12 +16,15 @@ import { Switch, Route } from "react-router-dom";
 const theme = createMuiTheme(themeFile);
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-
+          <AppBar></AppBar>
           <Switch>
             {" "}
             <Route exact path="/" component={Home} />

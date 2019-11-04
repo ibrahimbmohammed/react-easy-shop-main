@@ -16,10 +16,11 @@ const useStyles = makeStyles({
     width: 140,
     height: 140,
     position: "relative",
+    transform: "translateX(23%)",
     "@media (min-width: 1024px)": {
       width: 150,
       height: 150,
-      transform: "translateX(10%)"
+      transform: "translateX(55%)"
     }
   },
   media: {

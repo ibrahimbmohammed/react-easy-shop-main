@@ -15,7 +15,7 @@ class SignUp extends Component {
     const { classes } = this.props;
     return (
       <>
-        <Container>
+        <Container maxWidth="xs" className={classes.defaultmagin}>
           <Grid container item justify="center" alignItems="center" xs={12}>
             <Grid item xs={12}>
               <Typography
