@@ -8,106 +8,246 @@ import Button from "@material-ui/core/Button";
 import { withStyles } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import styles from "../../Theme/MuiTheme";
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 import Container from "@material-ui/core/Container";
-class SignUp extends Component {
+import { AppBarContext } from "../../Context/AppBarContext";
+import AppBar from "../../components/AppBar/AppBarII";
+import Mail from "@material-ui/icons/Mail";
+import { Formik, Field, Form } from "formik";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Axios from "axios";
+class SignIn extends Component {
+  constructor() {
+    super();
+    this.state = {
+      item: "",
+      isLoading: false,
+      error: false
+    };
+  }
+  static contextType = AppBarContext;
   render() {
     const { classes } = this.props;
+    const { visible } = this.context;
     return (
       <>
+        {visible && <AppBar />}
         <Container maxWidth="xs" className={classes.defaultmagin}>
-          <Grid container item justify="center" alignItems="center" xs={12}>
-            <Grid item xs={12}>
-              <Typography
-                className={classes.headingText}
-                gutterBottom
-                variant="h6"
-                component="h6"
-              >
-                Sign In
-              </Typography>
-            </Grid>
-            <Grid
-              container
-              item
-              justify="center"
-              alignItems="center"
-              item
-              xs={12}
-            >
-              <AccountCircle style={{ fontSize: 100 }} />
-            </Grid>
-            <div className={classes.inputMargin}>
-              <Grid container item spacing={1} alignItems="flex-end">
-                <Grid item>
-                  <AccountCircle />
-                </Grid>
-                <Grid item>
-                  <TextField id="input-with-icon-grid" label="Username" />
-                </Grid>
-              </Grid>
-            </div>{" "}
-            <div className={classes.inputMargin}>
-              <Grid container item spacing={1} alignItems="flex-end">
-                <Grid item>
-                  <LocalPhone />
-                </Grid>
-                <Grid item>
-                  <TextField id="input-with-icon-grid" label="Phone Number" />
-                </Grid>
-              </Grid>
-            </div>{" "}
-            <div className={classes.inputMargin}>
-              <Grid container item spacing={1} alignItems="flex-end">
-                <Grid item>
-                  <Lock />
-                </Grid>
-                <Grid item>
-                  <TextField id="input-with-icon-grid" label="Password" />
-                </Grid>
-              </Grid>
-            </div>{" "}
-            {/* text-info */}
-            <Grid item container justify="center" alignItems="center" xs={12}>
-              <Grid item xs={8}>
-                {" "}
-                <Typography
-                  className={classes.AccountText}
-                  // gutterBottom
-                  // variant="p"
-                  // component="h4"
-                >
-                  Don’t have an Account yet? <br />
-                  <Link href="#" className={classes.link}>
-                    Sign up
-                  </Link>
-                  ,its free
-                </Typography>
-              </Grid>
+          <Formik
+            initialValues={{ username: "" }}
+            onSubmit={(data, { setSubmitting }) => {
+              this.setState({
+                isLoading: true
+              });
+              setSubmitting(true);
+              //make  asycn call
 
-              <Grid
-                item
-                container
-                item
-                justify="center"
-                alignItems="center"
-                item
-                xs={12}
-              >
-                <Button
-                  variant="contained"
-                  size="large"
-                  color="primary"
-                  className={classes.margin}
+              Axios.post(
+                ` https://europe-west1-easy-shop-53cc2.cloudfunctions.net/api/signIn
+                `,
+                data
+              )
+                .then(doc => {
+                  localStorage.setItem("FBIdtoken", `Bearer ${doc.data.token}`);
+                  this.setState({
+                    isLoading: false,
+                    item: doc.data
+                  });
+                  this.props.history.push("/");
+                  console.log(this.state.item);
+                })
+                .catch(err => {
+                  console.error(err);
+
+                  this.setState({
+                    error: true,
+                    isLoading: false
+                  });
+                });
+
+              console.log(data);
+              setSubmitting(false);
+            }}
+          >
+            {({
+              value,
+              isSubmitting,
+              handleChange,
+              handleSubmit,
+              handleBlur
+            }) => (
+              <Form>
+                <Grid
+                  container
+                  item
+                  justify="center"
+                  alignItems="center"
+                  xs={12}
                 >
-                  Sign In
-                </Button>
-              </Grid>
-            </Grid>
-          </Grid>
+                  <Grid item xs={12}>
+                    <Typography
+                      className={classes.headingText}
+                      gutterBottom
+                      variant="h6"
+                      component="h6"
+                    >
+                      Sign In
+                    </Typography>
+                  </Grid>
+                  <Grid
+                    container
+                    item
+                    justify="center"
+                    alignItems="center"
+                    item
+                    xs={12}
+                  >
+                    <AccountCircle style={{ fontSize: 100 }} />
+                  </Grid>
+                  {/* <div className={classes.inputMargin}>
+                    <Grid container item spacing={1} alignItems="flex-end">
+                      <Grid item>
+                        <AccountCircle />
+                      </Grid>
+                      <Grid item>
+              
+                        <Field
+                          name="username"
+                          label="Username"
+                          type="input"
+                          as={TextField}
+                        ></Field>
+                      </Grid>
+                    </Grid>
+                  </div>{" "} */}
+                  <div className={classes.inputMargin}>
+                    <Grid container item spacing={1} alignItems="flex-end">
+                      <Grid item>
+                        <Mail />
+                      </Grid>
+                      <Grid item>
+                        {/* <TextField
+                          id="input-with-icon-grid"
+                          label="Email"
+                        /> */}
+                        <Field
+                          name="email"
+                          label="Email"
+                          type="input"
+                          required
+                          as={TextField}
+                        ></Field>
+                      </Grid>
+                    </Grid>
+                  </div>{" "}
+                  <div className={classes.inputMargin}>
+                    <Grid container item spacing={1} alignItems="flex-end">
+                      <Grid item>
+                        <Lock />
+                      </Grid>
+                      <Grid item>
+                        {/* <TextField id="input-with-icon-grid" label="Password" /> */}
+                        <Field
+                          label="Password"
+                          name="password"
+                          type="password"
+                          required
+                          helperText={this.state.error}
+                          error={this.state.error}
+                          as={TextField}
+                        ></Field>
+                      </Grid>
+                    </Grid>
+                  </div>{" "}
+                  {/* text-info */}
+                  <Grid
+                    item
+                    container
+                    justify="center"
+                    alignItems="center"
+                    xs={12}
+                  >
+                    <Grid item xs={8}>
+                      {" "}
+                      <Typography
+                        className={classes.AccountText}
+                        // gutterBottom
+                        // variant="p"
+                        // component="h4"
+                      >
+                        Don’t have an Account yet? <br />
+                        <Link to="/signUp" className={classes.link}>
+                          Sign up
+                        </Link>
+                        ,its free
+                      </Typography>
+                    </Grid>
+
+                    <Grid
+                      item
+                      container
+                      item
+                      justify="center"
+                      alignItems="center"
+                      item
+                      xs={12}
+                    >
+                      {this.state.isLoading ? (
+                        <CircularProgress className={classes.progress} />
+                      ) : (
+                        <Button
+                          type="submit"
+                          variant="contained"
+                          size="large"
+                          color="primary"
+                          className={classes.margin}
+                        >
+                          Sign In
+                        </Button>
+                      )}
+                    </Grid>
+                  </Grid>
+                </Grid>
+                <pre>{JSON.stringify(value, null, 2)}</pre>
+                {/* <Button type="submit">submit</Button> */}
+              </Form>
+            )}
+          </Formik>
         </Container>
       </>
     );
   }
 }
-export default withStyles(styles)(SignUp);
+export default withStyles(styles)(SignIn);
+
+{
+  /* <Formik
+initialValues={{ username: "user" }}
+onSubmit={(data, { setSubmitting }) => {
+  setSubmitting(true);
+  //make  asycn call
+  console.log(data);
+  setSubmitting(false);
+}}
+>
+{({
+  value,
+  isSubmitting,
+  handleChange,
+  handleSubmit,
+  handleBlur
+}) => (
+  <Form onSubmit={handleSubmit}>
+    <Field name="username" type="input" as={TextField}></Field>
+    <TextField
+      name="username"
+      value={value.username}
+      onChange={handleChange}
+      onBlur={handleBlur}
+    />
+    <Button type="submit">submit</Button>
+    <pre>{JSON.stringify(value, null, 2)}</pre>
+  </Form>
+)}
+</Formik> */
+}

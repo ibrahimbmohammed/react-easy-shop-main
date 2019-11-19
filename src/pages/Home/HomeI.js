@@ -28,12 +28,14 @@ import { Link } from "@material-ui/core";
 import AppBar from "../../components/AppBar/AppBarI";
 import { AppBarContext, AppBarConsumer } from "../../Context/AppBarContext";
 import { AuthContext, AuthConsumer } from "../../Context/AuthContext";
+import handleViewport from "../../utils/handleViewport";
+
 class Home extends Component {
   constructor() {
     super();
     this.state = {
       items: [],
-      isLoading: true,
+      isLoading: false,
       screenWidth: window.innerWidth,
       lastItem: "",
       dataAvailable: false,
@@ -58,6 +60,9 @@ class Home extends Component {
     window.removeEventListener("scroll", this.handleMoreData);
   }
   handleData = () => {
+    this.setState({
+      isLoading: true
+    });
     Axios.get(
       ` https://europe-west1-easy-shop-53cc2.cloudfunctions.net/api/productss
     `
@@ -86,7 +91,9 @@ class Home extends Component {
         });
       });
   };
-
+  onEnterViewport = () => {
+    console.log("hurry");
+  };
   ///Handling more data
   handleMoreData = () => {
     this.setState({
@@ -115,15 +122,19 @@ class Home extends Component {
             console.log([...this.state.items]);
           }
         );
-        console.log(
-          this.state.items.data[this.state.items.data.length - 1].createdAt
-        );
 
         console.log(doc.data.data);
         // console.log([this.state.items, ...doc.data.data]);
         console.log(this.state.items);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+
+        this.setState({
+          error: true,
+          isLoading: false
+        });
+      });
   };
   handleLast() {
     this.setState(
@@ -141,19 +152,31 @@ class Home extends Component {
     console.log("hi");
   };
 
-  handleScroll = () => {
-    if (this.scroller) {
-      console.log(this.scroller.scrollTop);
-      if (
-        this.scroller.scrollTop >= 590 &&
-        !this.state.isLoading &&
-        this.state.count == true
-      ) {
-        this.handleMoreData();
-      }
+  // handleScroll = () => {
+  //   if (this.scroller) {
+  //     console.log(this.scroller.getBoundingClientRect().x);
+  //     if (
+  //       this.scroller.scrollTop >= 590 &&
+  //       !this.state.isLoading &&
+  //       this.state.count == true
+  //     ) {
+  //       this.handleMoreData();
+  //     }
+  //   }
+  // };
+  handleScrolls = e => {
+    let element = e.target;
+    if (
+      element.scrollHeight - element.scrollTop === element.clientHeight &&
+      !this.state.isLoading &&
+      this.state.count == true
+    ) {
+      // do something at end of scroll
+      console.log("mongo");
+
+      this.handleMoreData();
     }
   };
-
   render() {
     const { classes } = this.props;
     // const { visible } = this.context;
@@ -180,11 +203,16 @@ class Home extends Component {
             overflowY: "auto"
           }}
           onScroll={this.handleScroll}
+          onScroll={this.handleScrolls}
           ref={scroller => {
             this.scroller = scroller;
           }}
         >
-          <Container className={classes.defaultmagin} maxWidth="md">
+          <Container
+            className={classes.defaultmagin}
+            onScroll={this.handleScrolls}
+            maxWidth="md"
+          >
             <Grid
               container
               onScroll={this.handleScroll}
@@ -410,7 +438,7 @@ class Home extends Component {
                 </Grid>
 
                 <Container className={classes.underline2} maxWidth="sm">
-                  <Grid container spacing={3}>
+                  <Grid container spacing={1}>
                     {!this.state.dataAvailable
                       ? null
                       : this.state.items.map((item, i) => {
@@ -448,10 +476,10 @@ class Home extends Component {
                   >
                     {" "}
                     <div className={"hello"}>
-                      {this.state.error ? <h2>please try</h2> : null}
-                      {this.state.isLoading && (
+                      {this.state.error ? <h2>please refresh!</h2> : null}
+                      {this.state.isLoading ? (
                         <CircularProgress className={classes.progress} />
-                      )}
+                      ) : null}
                     </div>
                   </Grid>
                 </Container>

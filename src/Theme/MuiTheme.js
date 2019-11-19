@@ -1,7 +1,7 @@
 const theme = {
   typography: {
+    fontFamily: "Tangerine, cursive",
     fontFamily: "montserrat",
-
     useNextVariants: true
   },
   palette: {
@@ -13,7 +13,7 @@ const theme = {
     },
     secondary: {
       light: " #ab003c",
-      main: "#f50057",
+      main: "rgba(255, 255, 255, 0.2)",
       dark: "#f73378",
       contrastText: "#fff"
     }
@@ -44,6 +44,23 @@ const theme = {
   defaultmagin: {
     marginTop: 70,
     marginBottom: 70
+  },
+  margin2: {
+    paddingLeft: 22,
+    paddingRight: 22,
+    "@media (min-width: 1024px)": {
+      marginTop: 30,
+      padding: "15px 30px 15px 30px"
+    }
+  },
+  margin: {
+    "@media (min-width: 1024px)": {
+      marginTop: 30,
+      padding: 15
+    }
+  },
+  link: {
+    textDecoration: "none"
   }
 };
 

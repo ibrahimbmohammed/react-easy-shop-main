@@ -12,8 +12,9 @@ function getModalStyle() {
 
   return {
     top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
+    margin: "auto"
+    // left: `${left}%`,
+    // transform: `translate(-${top}%, -${left}%)`
   };
 }
 
@@ -21,6 +22,7 @@ const useStyles = makeStyles(theme => ({
   paper: {
     position: "absolute",
     width: 400,
+    marginTop: 100,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],
@@ -34,7 +36,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SimpleModal({ variant, name }) {
+export default function SimpleModal({ variant, name, error }) {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
   const [modalStyle] = React.useState(getModalStyle);
@@ -47,10 +49,11 @@ export default function SimpleModal({ variant, name }) {
   const handleClose = () => {
     setOpen(false);
   };
-
+  console.log(error);
   return (
     <div>
       <Button
+        className={classes.margin2}
         variant={variant}
         size="large"
         color="primary"
@@ -61,6 +64,11 @@ export default function SimpleModal({ variant, name }) {
       </Button>
 
       <Modal
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         open={open}

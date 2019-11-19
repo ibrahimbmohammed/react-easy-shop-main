@@ -1,14 +1,19 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import { AppBarProvider } from "./Context/AppBarContext";
+import { AuthProvider } from "./Context/AuthContext";
 import { BrowserRouter as Router } from "react-router-dom";
 import * as serviceWorker from "./serviceWorker";
 // import {DataContext} from "../context"
 ReactDOM.render(
-  <Router>
-    <App />
-  </Router>,
-
+  <AuthProvider>
+    <AppBarProvider>
+      <Router>
+        <App />
+      </Router>
+    </AppBarProvider>
+  </AuthProvider>,
   document.getElementById("root")
 );
 

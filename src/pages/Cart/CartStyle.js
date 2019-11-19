@@ -7,7 +7,7 @@ const styles = {
   },
   cartCard: {
     "@media (min-width: 1024px)": {
-      position: "absolute",
+      position: "fixed",
       right: "5%"
     }
   }

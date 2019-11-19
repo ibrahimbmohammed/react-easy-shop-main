@@ -9,6 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import { AppBarContext } from "../../Context/AppBarContext";
 import AppBar from "../../components/AppBar/AppBarII";
+
 import pic1 from "../../images/lacenoback3collloor.png";
 import pic1a from "../../images/final.png";
 import pic2 from "../../images/minified (2).jpg";
@@ -21,7 +22,6 @@ class Category extends Component {
   }
   // method that gets data using the prop variable as an aguement
   static contextType = AppBarContext;
-
   getData = data => {
     if (data == "Lace") {
       return [
@@ -32,7 +32,8 @@ class Category extends Component {
       ];
     }
     return [
-      { name: "All Catergories", pic: pic1a },
+      { name: "Swiss Lace", pic: pic2 },
+      { name: "Voile Lace", pic: pic3 },
       { name: "Chiganvy", pic: pic2 },
       { name: "Dominion", pic: pic3 },
       { name: "Holland Wax", pic: pic4 },
@@ -93,7 +94,3 @@ class Category extends Component {
   }
 }
 export default withStyles(styles)(Category);
-//import { AppBarContext } from "../../Context/AppBarContext";
-//import AppBar from "../../components/AppBar/AppBarII";
-//  static contextType = AppBarContext;
-//const { visible } = this.context;

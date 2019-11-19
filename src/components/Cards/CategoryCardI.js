@@ -45,6 +45,11 @@ const useStyles = makeStyles({
     backgroundColor: " rgba(0,0,0,0.5)",
     zIndex: 2,
     cursor: "pointer"
+  },
+  HeadingText: {
+    "@media (min-width: 724px)": {
+      opacity: 0
+    }
   }
 });
 

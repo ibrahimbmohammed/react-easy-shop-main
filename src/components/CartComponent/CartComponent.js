@@ -57,7 +57,8 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PaperSheet() {
+export default function PaperSheet({ item }) {
+  const { createdAt, image_url, itemId, price, quantity, total } = item;
   const classes = useStyles();
 
   return (
@@ -65,7 +66,7 @@ export default function PaperSheet() {
       <Paper className={classes.root}>
         <Grid container spacing={1} xs={12}>
           <Grid item xs={4} md={4}>
-            <img className={classes.img} alt="complex" src={pic} />
+            <img className={classes.img} alt="complex" src={image_url} />
             {/* <CardMedia
               className={classes.media}
               src={pic}
@@ -87,7 +88,7 @@ export default function PaperSheet() {
               variant="p"
               component="h3"
             >
-              NGN ₦5000
+              NGN ₦{total}
             </Typography>
           </Grid>
           <Grid

@@ -5,7 +5,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import styles from "../../Theme/MuiTheme";
-
+import { Link } from "react-router-dom";
 const useStyles = makeStyles({
   ...styles,
   card: {
@@ -32,22 +32,34 @@ const useStyles = makeStyles({
   }
 });
 
-export default function MediaCard({ image }) {
+export default function MediaCard({ item }) {
   const classes = useStyles();
-
+  const {
+    createdAt,
+    description,
+    image_url,
+    itemId,
+    name,
+    price,
+    product_cat,
+    product_new,
+    product_quantity
+  } = item;
   return (
     <Card className={classes.card}>
-      <CardMedia
-        className={classes.media}
-        image={image}
-        title="Contemplative Reptile"
-      />
+      <Link to={`/products/${itemId}`}>
+        <CardMedia
+          className={classes.media}
+          image={image_url}
+          title="Contemplative Reptile"
+        />{" "}
+      </Link>
       <CardContent fontWeight="fontWeightLight" className={classes.CardCont}>
         <div gutterBottom className={classes.CardText}>
-          Chiganvy Ankara Fabric blue pattern
+          {name}
         </div>
         <Typography variant="p" component="h4" className={classes.CardText2}>
-          NGN ₦5000
+          NGN ₦{price}
         </Typography>
       </CardContent>
     </Card>
