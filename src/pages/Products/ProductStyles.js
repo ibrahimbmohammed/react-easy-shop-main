@@ -10,6 +10,9 @@ const styles = {
   },
   media: {
     height: 140
+  },
+  link: {
+    textDecoration: "none"
   }
 };
 

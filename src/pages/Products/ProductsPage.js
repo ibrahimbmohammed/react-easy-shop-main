@@ -97,9 +97,6 @@ class ProductsPage extends Component {
             console.log([...this.state.items]);
           }
         );
-        console.log(
-          this.state.items.data[this.state.items.data.length - 1].createdAt
-        );
 
         console.log(doc.data.data);
         // console.log([this.state.items, ...doc.data.data]);
@@ -123,16 +120,17 @@ class ProductsPage extends Component {
     console.log("hi");
   };
 
-  handleScroll = () => {
-    if (this.scroller) {
-      console.log(this.scroller.scrollTop);
-      if (
-        this.scroller.scrollTop >= 590 &&
-        !this.state.isLoading &&
-        this.state.count == true
-      ) {
-        this.handleMoreData();
-      }
+  handleScrolls = e => {
+    let element = e.target;
+    if (
+      element.scrollHeight - element.scrollTop === element.clientHeight &&
+      !this.state.isLoading &&
+      this.state.count == true
+    ) {
+      // do something at end of scroll
+      console.log("mongo");
+
+      this.handleMoreData();
     }
   };
 
@@ -145,7 +143,22 @@ class ProductsPage extends Component {
     return (
       <>
         {visible && <AppBar />}
-        <Container maxWidth="sm" className={classes.defaultmagin}>
+        <Container
+          maxWidth="sm"
+          className={classes.defaultmagin}
+          style={{
+            width: "100vw",
+            height: "100vh",
+            //position: "absolute"
+            overflowY: "auto",
+            zIndex: 100
+          }}
+          onScroll={this.handleScroll}
+          onScroll={this.handleScrolls}
+          ref={scroller => {
+            this.scroller = scroller;
+          }}
+        >
           {" "}
           <Grid container spacing={3}>
             {!this.state.dataAvailable ? (
@@ -156,39 +169,24 @@ class ProductsPage extends Component {
                 <Grid item xs={6} sm={4} md={4}>
                   <Skeleton variant="rect" width={150} height={150} />
                 </Grid>
-                {this.state.error && <h1>something went wrong</h1>}
+                {this.state.error && (
+                  <h1>
+                    something went wrong!
+                    <br /> Please try again
+                  </h1>
+                )}
               </>
             ) : (
               this.state.items.map((item, i) => {
                 return (
                   <Grid item xs={6} sm={4} md={4}>
-                    <Link to={`/products/${"single"}`}>
+                    <Link to={`/products/${"single"}`} className={classes.link}>
                       <ProductCard key={i} item={item} />
                     </Link>
                   </Grid>
                 );
               })
             )}
-            {/* <Grid item xs={6} sm={4} md={4}>
-              <Link to={`/products/${"single"}`}>
-                <ProductCard />
-              </Link>
-            </Grid>
-            <Grid item xs={6} sm={4} md={4}>
-              <ProductCard></ProductCard>
-            </Grid>{" "}
-            <Grid item xs={6} sm={4} md={4}>
-              <ProductCard></ProductCard>
-            </Grid>{" "}
-            <Grid item xs={6} sm={4} md={4}>
-              <ProductCard></ProductCard>
-            </Grid>{" "}
-            <Grid item xs={6} sm={4} md={4}>
-              <ProductCard></ProductCard>
-            </Grid>
-            <Grid item xs={6} sm={4} md={4}>
-              <ProductCard></ProductCard>
-            </Grid> */}
           </Grid>
         </Container>
       </>

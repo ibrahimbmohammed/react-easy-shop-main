@@ -25,14 +25,14 @@ class Category extends Component {
   getData = data => {
     if (data == "Lace") {
       return [
-        { name: "All Catergories", pic: pic1 },
+        { name: "All Lace", pic: pic1 },
         { name: "Swiss Lace", pic: pic2 },
         { name: "Voile Lace", pic: pic3 },
         { name: "Lace", pic: pic4 }
       ];
     }
     return [
-      { name: "All Catergories", pic: pic1a },
+      { name: "All Ankara", pic: pic1a },
       { name: "Chiganvy", pic: pic2 },
       { name: "Dominion", pic: pic3 },
       { name: "Holland Wax", pic: pic4 },

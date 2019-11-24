@@ -58,6 +58,7 @@ export default class App extends Component {
               exact
               path="/SignIn"
               component={SignIn}
+
               //authenticated={authenticated}
             />
             <AuthRoute

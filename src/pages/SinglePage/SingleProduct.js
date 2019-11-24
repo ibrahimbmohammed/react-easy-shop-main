@@ -19,6 +19,8 @@ import { AppBarContext } from "../../Context/AppBarContext";
 import AppBar from "../../components/AppBar/AppBarII";
 import Axios from "axios";
 import Skeleton from "@material-ui/lab/Skeleton";
+import WhatsApp from "@material-ui/icons/WhatsApp";
+import Share from "@material-ui/icons/Share";
 
 const tileData = [
   {
@@ -60,6 +62,8 @@ class SingleProduct extends Component {
       item: "",
       isLoading: false,
       dataAvailable: false,
+      success: "",
+      cartError: false,
       error: false
     };
   }
@@ -87,6 +91,32 @@ class SingleProduct extends Component {
 
         this.setState({
           error: true,
+          isLoading: false
+        });
+      });
+  };
+  handleAddToCart = () => {
+    const token = localStorage.FBIdtoken;
+    this.setState({
+      isLoading: true
+    });
+    Axios.get(
+      `  https://europe-west1-easy-shop-53cc2.cloudfunctions.net/api/products/addCart/${this.props.match.params.slug}
+  `,
+      { headers: { Authorization: `${token}` } }
+    )
+      .then(doc => {
+        this.setState({
+          success: doc.data,
+          isLoading: false
+        });
+        console.log(this.state.item);
+      })
+      .catch(err => {
+        console.error(err);
+
+        this.setState({
+          cartError: true,
           isLoading: false
         });
       });
@@ -120,7 +150,7 @@ class SingleProduct extends Component {
               </h2>
             )}
             {this.state.isLoading ? (
-              <Skeleton variant="rect" width={"100%"} height={150} />
+              <Skeleton variant="rect" width={"100%"} height={360} />
             ) : (
               <CardMedia
                 className={classes.mediaMain}
@@ -132,9 +162,22 @@ class SingleProduct extends Component {
           <Grid item xs={12} md={6}>
             {/* <Paper className={classes.root}> */}{" "}
             <Container>
-              <Typography className={classes.price} variant="h6" component="h6">
-                NGN ₦{price}
-              </Typography>
+              <Grid container justify="space-between" item xs={12} md={6}>
+                <Typography
+                  className={classes.price}
+                  variant="h6"
+                  component="h6"
+                >
+                  NGN ₦{price}
+                </Typography>
+                <Typography
+                  className={classes.price}
+                  variant="h6"
+                  component="h2"
+                >
+                  <WhatsApp /> <Share />
+                </Typography>
+              </Grid>
               <Typography
                 className={classes.detailsText}
                 gutterBottom
@@ -154,7 +197,7 @@ class SingleProduct extends Component {
                 {" "}
                 <Grid item>
                   {/* <Modal variant={"contained"} name={"buy now "} /> */}
-                  <Modal error={this.state.error} />
+                  <Modal error={this.state.error} item={this.state.item} />
                 </Grid>
                 <Grid item>
                   {" "}
@@ -163,7 +206,8 @@ class SingleProduct extends Component {
                     size="large"
                     color="primary"
                     className={classes.margin2}
-                    disabled={this.state.error}
+                    disabled={this.state.isLoading || this.state.success}
+                    onClick={this.handleAddToCart}
                   >
                     Add to Cart
                   </Button>

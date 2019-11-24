@@ -39,9 +39,9 @@ class ExampleCustom extends React.Component {
           dialogStyles={myBigGreenDialog}
           hideOnOverlayClicked
           ref={ref => (this.customDialog = ref)}
-          title="A Custom Modal"
+          title="Your Payment Options"
         >
-          <Payment></Payment>
+          <Payment item={this.props.item} />
         </SkyLight>
       </>
     );

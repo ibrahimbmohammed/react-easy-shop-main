@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import jwtDecode from "jwt-decode";
 const AuthContext = React.createContext();
+//import {Redirect} from "react-router-dom"
 
 class AuthProvider extends Component {
   state = {
@@ -11,14 +12,14 @@ class AuthProvider extends Component {
   }
 
   handleAuth = () => {
-    const token = localStorage.FBIdoken;
+    const token = localStorage.FBIdtoken;
     if (token) {
       const decodedToken = jwtDecode(token);
       if (decodedToken.exp * 1000 < Date.now()) {
         this.setState({
           authenticated: false
         });
-
+        localStorage.clear();
         window.location.href = "/signIn";
       } else {
         this.setState({
@@ -31,7 +32,9 @@ class AuthProvider extends Component {
   render() {
     return (
       <>
-        <AuthContext.Provider value={{ ...this.state }}>
+        <AuthContext.Provider
+          value={{ ...this.state, handleAuth: this.handleAuth }}
+        >
           {this.props.children}
         </AuthContext.Provider>
       </>
@@ -41,3 +44,7 @@ class AuthProvider extends Component {
 const AuthConsumer = AuthContext.Consumer;
 
 export { AuthConsumer, AuthProvider, AuthContext };
+
+//if (Date.now() >= exp * 1000) {
+// return false;
+//}

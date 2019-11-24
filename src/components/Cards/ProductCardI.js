@@ -25,10 +25,12 @@ const useStyles = makeStyles({
     paddingBottom: 10,
     marginTop: -40,
     transform: "translateY(30px)",
-    opacity: 0.6
+    opacity: 0.6,
+    textDecoration: "none"
   },
   CardText2: {
-    transform: "translateY(20px)"
+    transform: "translateY(20px)",
+    textDecoration: "none"
   }
 });
 

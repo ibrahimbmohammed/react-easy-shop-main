@@ -7,6 +7,7 @@
     "@material-ui/icons": "^4.5.1",
     "@material-ui/lab": "^4.0.0-alpha.29",
     "axios": "^0.19.0",
+    "currency.js": "^1.2.2",
     "dayjs": "^1.8.16",
     "formik": "^2.0.3",
     "hoist-non-react-statics": "^3.3.1",
@@ -21,11 +22,13 @@
     "react-scripts": "3.0.1",
     "react-skylight": "^0.5.1",
     "react-spinners-css": "^1.1.2",
+    "react-spring": "^8.0.27",
     "react-stripe-checkout": "2.6.3",
     "react-swipe": "^6.0.4",
     "react-toastify": "^5.4.0",
     "styled-components": "^4.4.0",
     "swipe-js-iso": "^2.1.5",
+    "toasted-notes": "^3.0.0",
     "yup": "^0.27.0"
   },
   "scripts": {

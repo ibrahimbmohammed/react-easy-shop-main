@@ -2,22 +2,29 @@ import React from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import { makeStyles } from "@material-ui/core/styles";
 import "react-toastify/dist/ReactToastify.css";
 
 toast.configure();
-
-export default function App() {
-  const [product] = React.useState({
-    name: "Tesla Roadster",
-    price: 64998.67,
-    description: "Cool car"
-  });
-
+const useStyles = makeStyles(theme => ({
+  buttonp: {
+    transform: "translate(25%)"
+  }
+}));
+export default function App({ item }) {
+  const classes = useStyles();
+  console.log(item);
+  App.defaultProps = {
+    item: {
+      name: "product",
+      price: 100
+    }
+  };
+  const { name, price, image_url } = item;
   async function handleToken(token, addresses) {
     const response = await axios.post(
-      "https://ry7v05l6on.sse.codesandbox.io/checkout",
-      { token, product }
+      "https://stripep-payment.herokuapp.com/checkout",
+      { token, item }
     );
     const { status } = response.data;
     console.log("Response:", response.data);
@@ -29,14 +36,18 @@ export default function App() {
   }
 
   return (
-    <StripeCheckout
-      stripeKey="pk_test_4TbuO6qAW2XPuce1Q6ywrGP200NrDZ2233"
-      token={handleToken}
-      amount={product.price * 100}
-      name="Tesla Roadster"
-      billingAddress
-      shippingAddress
-    />
+    <div className={classes.buttonp}>
+      <StripeCheckout
+        stripeKey="pk_test_28A4F4GgExRwabZZeprlxedK00PVaaSDy0"
+        token={handleToken}
+        currency="ngn"
+        image={image_url}
+        amount={price * 100}
+        name={name}
+        billingAddress
+        shippingAddress
+      />
+    </div>
   );
 }
 

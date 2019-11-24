@@ -10,6 +10,7 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import IconButton from "@material-ui/core/IconButton";
 import pic from "../../images/minified (4).jpg";
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
@@ -57,7 +58,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function PaperSheet({ item }) {
+export default function PaperSheet({
+  item,
+  handleDelete,
+  handleIncrease,
+  handleDecrease,
+  isLoading
+}) {
   const { createdAt, image_url, itemId, price, quantity, total } = item;
   const classes = useStyles();
 
@@ -100,7 +107,11 @@ export default function PaperSheet({ item }) {
             alignItems="flex-start"
             justify="flex-end"
           >
-            <IconButton className={classes.button} aria-label="delete">
+            <IconButton
+              className={classes.button}
+              onClick={() => handleDelete(itemId)}
+              aria-label="delete"
+            >
               <DeleteIcon />
             </IconButton>
           </Grid>
@@ -114,10 +125,27 @@ export default function PaperSheet({ item }) {
             justify="flex-end"
           >
             <Grid item>
-              <IconButton className={classes.button} aria-label="delete">
+              <IconButton
+                className={classes.button}
+                onClick={() => handleIncrease(itemId)}
+                disabled={isLoading}
+                aria-label="increase"
+              >
                 <ExpandLess />
+                <span
+                  style={{
+                    transform: "translateX(10px)"
+                  }}
+                >
+                  <small>{quantity}</small>
+                </span>
               </IconButton>
-              <IconButton className={classes.button} aria-label="delete">
+              <IconButton
+                className={classes.button}
+                onClick={() => handleDecrease(itemId)}
+                disabled={isLoading}
+                aria-label="delete"
+              >
                 <ExpandMore />
               </IconButton>
             </Grid>

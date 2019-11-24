@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { flexbox } from "@material-ui/system";
-
+import Payment from "../../components/Payment/Payment";
 const useStyles = makeStyles({
   card: {
     minWidth: 275,
@@ -103,7 +103,8 @@ export default function SimpleCard({ cartTotal }) {
         </Grid>
       </CardContent>
       <CardActions style={{ justifyContent: "center" }}>
-        <Button size="large">Learn More</Button>
+        <Payment></Payment>
+        {/* <Button size="large">Learn More</Button> */}
       </CardActions>
     </Card>
   );
