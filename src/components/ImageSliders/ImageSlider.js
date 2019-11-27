@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import pic1 from "../../images/Layer 7.png";
+import pic1 from "../../images/Layer 7.jpg";
 import pic2 from "../../images/Layer 8@1,5x.jpg";
 
 import { withStyles } from "@material-ui/styles";
