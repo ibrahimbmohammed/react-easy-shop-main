@@ -8,10 +8,10 @@ import "react-toastify/dist/ReactToastify.css";
 toast.configure();
 const useStyles = makeStyles(theme => ({
   buttonp: {
-    transform: "translate(25%)"
+    transform: "translate(5%)"
   }
 }));
-export default function App({ item }) {
+export default function App({ item, cartTotal }) {
   const classes = useStyles();
   console.log(item);
   App.defaultProps = {
@@ -36,13 +36,13 @@ export default function App({ item }) {
   }
 
   return (
-    <div>
+    <div className={classes.buttonp}>
       <StripeCheckout
         stripeKey="pk_test_28A4F4GgExRwabZZeprlxedK00PVaaSDy0"
         token={handleToken}
         currency="ngn"
         image={image_url}
-        amount={price * 100}
+        amount={cartTotal * 100}
         name={name}
         billingAddress
         shippingAddress

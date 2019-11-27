@@ -46,8 +46,9 @@ class Category extends Component {
   render() {
     const { visible } = this.context;
     const { classes } = this.props;
+
     const categorys = this.getData(this.props.match.params.slug);
-    console.log(categorys);
+    console.log(categorys[0].name);
     return (
       <>
         {visible && <AppBar />}
@@ -60,6 +61,32 @@ class Category extends Component {
             md={12}
             className={classes.defaultmagin}
           >
+            {/*  single */}
+            <Grid item xs={12} md={6}>
+              <Link to={`/products/category/${"All cat"}`}>
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.media}
+                    image={pic1}
+                    title="Contemplative Reptile"
+                  />
+
+                  <div style={styles.overlay2}>
+                    <div style={styles.overlay}>
+                      <Typography
+                        className={classes.HeadingText}
+                        // gutterBottom
+                        variant="h6"
+                        component="h5"
+                      >
+                        {"All lace"}
+                      </Typography>
+                    </div>
+                  </div>
+                </Card>
+              </Link>
+            </Grid>
+            {/*  end single */}
             {categorys.map((category, i) => (
               <Grid key={i} item xs={12} md={6}>
                 <Link to={`/products/category/${category.name}`}>

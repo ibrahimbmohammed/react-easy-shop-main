@@ -11,7 +11,9 @@ import AppBar from "../../components/AppBar/AppBarII";
 import Axios from "axios";
 import toast from "toasted-notes";
 import "toasted-notes/src/styles.css";
-
+import { Typography } from "@material-ui/core";
+import { Link } from "react-router-dom";
+import CircularProgress from "@material-ui/core/CircularProgress";
 // const CustomNotification = ({ title }) => {
 //   const theme = useTheme();
 //   return <div style={{ color: theme.primary }}>{title}</div>;
@@ -50,7 +52,7 @@ class Cart extends Component {
           () => {
             //console.log("call the function here");
             this.calculateTotal();
-            toast.notify("Hello world!", {
+            toast.notify("Wellcome to your cart", {
               position: "bottom",
               color: "blue",
               duration: 1000
@@ -60,11 +62,17 @@ class Cart extends Component {
         console.log(this.state.item);
       })
       .catch(err => {
-        console.error(err);
+        console.log(err);
 
         this.setState({
           error: true,
           isLoading: false
+        });
+
+        toast.notify("Oops! something went wrong,please try again", {
+          position: "top",
+          color: "blue",
+          duration: 2000
         });
       });
   };
@@ -87,7 +95,12 @@ class Cart extends Component {
             this.handleData();
           }
         );
-        console.log(this.state.item);
+        toast.notify("Item Increased", {
+          position: "top",
+          color: "blue",
+          duration: 1000
+        });
+        // console.log(this.state.item);
       })
       .catch(err => {
         console.error(err);
@@ -95,6 +108,11 @@ class Cart extends Component {
         this.setState({
           error: true,
           isLoading: false
+        });
+        toast.notify("Oops! something went wrong,please try again", {
+          position: "top",
+          color: "blue",
+          duration: 1000
         });
       });
     console.log("increase");
@@ -118,6 +136,11 @@ class Cart extends Component {
             this.handleData();
           }
         );
+        toast.notify("Item Decreased", {
+          position: "top",
+          color: "blue",
+          duration: 1000
+        });
       })
       .catch(err => {
         console.error(err);
@@ -125,6 +148,11 @@ class Cart extends Component {
         this.setState({
           error: true,
           isLoading: false
+        });
+        toast.notify("Oops! something went wrong,please try again", {
+          position: "top",
+          color: "blue",
+          duration: 1000
         });
       });
 
@@ -147,6 +175,11 @@ class Cart extends Component {
               this.handleData();
             }
           );
+          toast.notify("Item Deleted", {
+            position: "top",
+            color: "blue",
+            duration: 1000
+          });
         })
         .catch(err => {
           console.error(err);
@@ -154,6 +187,11 @@ class Cart extends Component {
           this.setState({
             error: true,
             isLoading: false
+          });
+          toast.notify("Oops! something went wrong,please try again", {
+            position: "top",
+            color: "blue",
+            duration: 1000
           });
         });
       console.log("Delete");
@@ -190,29 +228,50 @@ class Cart extends Component {
         {authenticated ? (
           <Container className={classes.defaultmagin}>
             <Grid container xs={12}>
-              {this.state.dataAvailable
-                ? cart.map((item, i) => (
-                    <Grid item xs={12} md={8} sm={5}>
-                      {" "}
-                      <CartComp
-                        key={i}
-                        item={item}
-                        handleIncrease={this.handleIncrease}
-                        handleDelete={this.handleDelete}
-                        handleDecrease={this.handleDecrease}
-                        isLoading={this.state.isLoading}
-                      />
-                    </Grid>
-                  ))
-                : null}
+              {this.state.dataAvailable ? (
+                cart.map((item, i) => (
+                  <Grid item xs={12} md={8} sm={5}>
+                    {" "}
+                    <CartComp
+                      key={i}
+                      item={item}
+                      handleIncrease={this.handleIncrease}
+                      handleDelete={this.handleDelete}
+                      handleDecrease={this.handleDecrease}
+                      isLoading={this.state.isLoading}
+                    />
+                  </Grid>
+                ))
+              ) : (
+                <Grid container item justify="center">
+                  {" "}
+                  <CircularProgress className={classes.progress} />
+                </Grid>
+              )}
 
               <Grid className={classes.cartCard} item xs={12} md={3} sm={5}>
                 {" "}
-                <CartTotal cartTotal={cartTotal} />
+                <CartTotal cartTotal={cartTotal} item={this.state.item} />
               </Grid>
             </Grid>
           </Container>
-        ) : null}
+        ) : (
+          <Grid xs={12}>
+            {" "}
+            <Typography
+              className={classes.HeadingTexts}
+              gutterBottom
+              variant="h6"
+              component="h5"
+            >
+              Please{" "}
+              <Link className={classes.HeadingTextss} to="/signIn">
+                sign in
+              </Link>{" "}
+              to use cart
+            </Typography>
+          </Grid>
+        )}
       </>
     );
   }

@@ -15,6 +15,9 @@ import pic6 from "../../images/minified (5).jpg";
 import SimilarProduct from "../../components/SimilarProductsCom/SimilarProductCom";
 import Container from "@material-ui/core/Container";
 import Modal from "../../components/Modal/ModalI";
+import ModalI from "../../components/Modal/Modal";
+import toast from "toasted-notes";
+import "toasted-notes/src/styles.css";
 import { AppBarContext } from "../../Context/AppBarContext";
 import AppBar from "../../components/AppBar/AppBarII";
 import Axios from "axios";
@@ -84,7 +87,7 @@ class SingleProduct extends Component {
           isLoading: false,
           dataAvailable: true
         });
-        console.log(this.state.item);
+        // console.log(this.state.item);
       })
       .catch(err => {
         console.error(err);
@@ -110,7 +113,12 @@ class SingleProduct extends Component {
           success: doc.data,
           isLoading: false
         });
-        console.log(this.state.item);
+        // console.log(this.state.item);
+        toast.notify("item Added Cart", {
+          position: "top",
+          color: "blue",
+          duration: 1000
+        });
       })
       .catch(err => {
         console.error(err);
@@ -119,7 +127,15 @@ class SingleProduct extends Component {
           cartError: true,
           isLoading: false
         });
+        toast.notify("Please SignIn to Add Items to your cart", {
+          position: "top",
+          color: "blue",
+          duration: 2000
+        });
       });
+  };
+  handleWhatsApp = () => {
+    console.log("hi");
   };
   static contextType = AppBarContext;
   render() {
@@ -175,7 +191,9 @@ class SingleProduct extends Component {
                   variant="h6"
                   component="h2"
                 >
-                  <WhatsApp /> <Share />
+                  {/* <WhatsApp onClick={this.handleWhatsApp} />  */}
+                  <ModalI />
+                  <Share />
                 </Typography>
               </Grid>
               <Typography
@@ -186,6 +204,7 @@ class SingleProduct extends Component {
               >
                 {description}
               </Typography>
+
               <Grid
                 item
                 container

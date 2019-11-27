@@ -143,52 +143,55 @@ class ProductsPage extends Component {
     return (
       <>
         {visible && <AppBar />}
-        <Container
-          maxWidth="sm"
-          className={classes.defaultmagin}
+        <div
           style={{
             width: "100vw",
             height: "100vh",
-            //position: "absolute"
-            overflowY: "auto",
-            zIndex: 100
+            position: "absolute",
+            overflowY: "auto"
+            //zIndex: 100
           }}
-          onScroll={this.handleScroll}
+          // onScroll={this.handleScroll}
           onScroll={this.handleScrolls}
           ref={scroller => {
             this.scroller = scroller;
           }}
         >
-          {" "}
-          <Grid container spacing={3}>
-            {!this.state.dataAvailable ? (
-              <>
-                <Grid item xs={6} sm={4} md={4}>
-                  <Skeleton variant="rect" width={150} height={150} />
-                </Grid>
-                <Grid item xs={6} sm={4} md={4}>
-                  <Skeleton variant="rect" width={150} height={150} />
-                </Grid>
-                {this.state.error && (
-                  <h1>
-                    something went wrong!
-                    <br /> Please try again
-                  </h1>
-                )}
-              </>
-            ) : (
-              this.state.items.map((item, i) => {
-                return (
+          <Container maxWidth="sm" className={classes.defaultmagin}>
+            {" "}
+            <Grid container spacing={3}>
+              {!this.state.dataAvailable ? (
+                <>
                   <Grid item xs={6} sm={4} md={4}>
-                    <Link to={`/products/${"single"}`} className={classes.link}>
-                      <ProductCard key={i} item={item} />
-                    </Link>
+                    <Skeleton variant="rect" width={150} height={150} />
                   </Grid>
-                );
-              })
-            )}
-          </Grid>
-        </Container>
+                  <Grid item xs={6} sm={4} md={4}>
+                    <Skeleton variant="rect" width={150} height={150} />
+                  </Grid>
+                  {this.state.error && (
+                    <h1>
+                      something went wrong!
+                      <br /> Please try again
+                    </h1>
+                  )}
+                </>
+              ) : (
+                this.state.items.map((item, i) => {
+                  return (
+                    <Grid item xs={6} sm={4} md={4}>
+                      <Link
+                        to={`/products/${"single"}`}
+                        className={classes.link}
+                      >
+                        <ProductCard key={i} item={item} />
+                      </Link>
+                    </Grid>
+                  );
+                })
+              )}
+            </Grid>
+          </Container>
+        </div>
       </>
     );
   }

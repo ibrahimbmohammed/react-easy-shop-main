@@ -18,7 +18,9 @@ class ExampleCustom extends React.Component {
       height: "50%",
       marginTop: "-200px",
       marginLeft: "-35%",
-      borderRadius: 10
+      borderRadius: 10,
+      alignItem: "center",
+      textAlign: "center"
     };
 
     return (

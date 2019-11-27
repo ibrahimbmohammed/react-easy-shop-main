@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { flexbox } from "@material-ui/system";
-import Payment from "../../components/Payment/Payment";
+import Payment from "../../components/Payment/PaymentCheckOut";
 const useStyles = makeStyles({
   card: {
     minWidth: 275,
@@ -31,7 +31,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function SimpleCard({ cartTotal }) {
+export default function SimpleCard({ cartTotal, item }) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   const spot = <div className={classes.spot}>•</div>;
@@ -61,7 +61,7 @@ export default function SimpleCard({ cartTotal }) {
             <Grid item>
               {" "}
               <Typography variant="body2" component="p">
-                NGN ₦ 0.00
+                NGN ₦{cartTotal}
               </Typography>
             </Grid>
           </Grid>
@@ -103,7 +103,7 @@ export default function SimpleCard({ cartTotal }) {
         </Grid>
       </CardContent>
       <CardActions style={{ justifyContent: "center" }}>
-        <Payment></Payment>
+        <Payment cartTotal={cartTotal} item={item}></Payment>
         {/* <Button size="large">Learn More</Button> */}
       </CardActions>
     </Card>
