@@ -16,6 +16,9 @@ import Mail from "@material-ui/icons/Mail";
 import { Formik, Field, Form } from "formik";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Axios from "axios";
+import toast from "toasted-notes";
+import "toasted-notes/src/styles.css";
+//;;
 class SignUp extends Component {
   constructor() {
     super();
@@ -34,7 +37,7 @@ class SignUp extends Component {
         {visible && <AppBar />}
         <Container maxWidth="xs" className={classes.defaultmagin}>
           <Formik
-            initialValues={{ username: "" }}
+            initialValues={{ handle: "" }}
             onSubmit={(data, { setSubmitting }) => {
               this.setState({
                 isLoading: true
@@ -55,6 +58,11 @@ class SignUp extends Component {
                   });
                   this.props.history.push("/");
                   console.log(this.state.item);
+                  toast.notify("signed in as", {
+                    position: "top",
+                    color: "blue",
+                    duration: 2000
+                  });
                 })
                 .catch(err => {
                   console.error(err);
@@ -62,6 +70,11 @@ class SignUp extends Component {
                   this.setState({
                     error: true,
                     isLoading: false
+                  });
+                  toast.notify("Oops! something went wrong,please try again", {
+                    position: "top",
+                    color: "blue",
+                    duration: 2000
                   });
                 });
 
@@ -91,7 +104,7 @@ class SignUp extends Component {
                       variant="h6"
                       component="h6"
                     >
-                      Sign In
+                      Sign Up
                     </Typography>
                   </Grid>
                   <Grid
@@ -111,7 +124,7 @@ class SignUp extends Component {
                       </Grid>
                       <Grid item>
                         <Field
-                          name="username"
+                          name="handle"
                           label="Username"
                           type="input"
                           required
@@ -136,7 +149,7 @@ class SignUp extends Component {
                       </Grid>
                     </Grid>
                   </div>{" "}
-                  <div className={classes.inputMargin}>
+                  {/* <div className={classes.inputMargin}>
                     <Grid container item spacing={1} alignItems="flex-end">
                       <Grid item>
                         <LocalPhone />
@@ -151,7 +164,7 @@ class SignUp extends Component {
                         ></Field>
                       </Grid>
                     </Grid>
-                  </div>{" "}
+                  </div>{" "} */}
                   <div className={classes.inputMargin}>
                     <Grid container item spacing={1} alignItems="flex-end">
                       <Grid item>
