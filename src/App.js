@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Home from "./pages/Home/HomeI";
 import Category from "./pages/Category/Category";
 import ProductsPage from "./pages/Products/ProductsPage";
+import ProductsPages from "./pages/Products/ProductsPages";
 import SingleProduct from "./pages/SinglePage/SingleProduct";
 import SignIn from "./pages/SignIn/SignIn";
 import SignUp from "./pages/SignUp/SignUp";
@@ -15,6 +16,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import themeFile from "./Theme/MuiTheme";
 import AuthRoute from "./utils/AuthRoute";
 import { Switch, Route } from "react-router-dom";
+import { AuthContext, AuthConsumer } from "./Context/AuthContext";
 
 const theme = createMuiTheme(themeFile);
 
@@ -25,7 +27,10 @@ export default class App extends Component {
       currentWidth: ""
     };
   }
+  static contextType = AuthContext;
   componentDidMount() {
+    const { handleAuth } = this.context;
+    handleAuth();
     this.updateDimensions();
     window.addEventListener("resize", this.updateDimensions);
   }
@@ -37,6 +42,7 @@ export default class App extends Component {
   };
 
   render() {
+    const { authenticated } = this.context;
     return (
       <>
         <ThemeProvider theme={theme}>
@@ -52,20 +58,24 @@ export default class App extends Component {
               path="/products/category/:slug"
               component={ProductsPage}
             />
+              <Route
+              exact
+              path="/products/categorys/:slug"
+              component={ProductsPages}
+            />
             <Route exact path="/products/:slug" component={SingleProduct} />
             <Route exact path="/Categories" component={Categories} />
             <AuthRoute
               exact
               path="/SignIn"
               component={SignIn}
-
-              //authenticated={authenticated}
+              authenticated={authenticated}
             />
             <AuthRoute
               exact
               path="/SignUp"
               component={SignUp}
-              //authenticated={authenticated}
+              authenticated={authenticated}
             />
             <Route exact path="/cart" component={Cart} />
             {/* <Route component={ErrorPage} /> */}{" "}

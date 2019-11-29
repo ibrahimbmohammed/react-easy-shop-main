@@ -25,14 +25,14 @@ class Category extends Component {
   getData = data => {
     if (data == "Lace") {
       return [
-        { name: "All Lace", pic: pic1 },
+        // { name: "All Lace", pic: pic1 },
         { name: "Swiss Lace", pic: pic2 },
         { name: "Voile Lace", pic: pic3 },
         { name: "Lace", pic: pic4 }
       ];
     }
     return [
-      { name: "All Ankara", pic: pic1a },
+      // { name: "All Ankara", pic: pic1a },
       { name: "Chiganvy", pic: pic2 },
       { name: "Dominion", pic: pic3 },
       { name: "Holland Wax", pic: pic4 },
@@ -48,7 +48,7 @@ class Category extends Component {
     const { classes } = this.props;
 
     const categorys = this.getData(this.props.match.params.slug);
-    console.log(categorys[0].name);
+    console.log(categorys);
     return (
       <>
         {visible && <AppBar />}
@@ -63,7 +63,7 @@ class Category extends Component {
           >
             {/*  single */}
             <Grid item xs={12} md={6}>
-              <Link to={`/products/category/${"All cat"}`}>
+              <Link to={`/products/categorys/${this.props.match.params.slug}`}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.media}
@@ -75,11 +75,10 @@ class Category extends Component {
                     <div style={styles.overlay}>
                       <Typography
                         className={classes.HeadingText}
-                        // gutterBottom
                         variant="h6"
                         component="h5"
                       >
-                        {"All lace"}
+                        {"All Categories"}
                       </Typography>
                     </div>
                   </div>

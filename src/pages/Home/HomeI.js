@@ -45,12 +45,12 @@ class Home extends Component {
   }
 
   // static contextType = AppBarContext;
-  // static contextType = AuthContext;
+  static contextType = AuthContext;
 
   componentDidMount() {
     window.addEventListener("resize", this.updateScreenWidth);
     this.handleData();
-    // this.handleMoreData();
+    this.handleUserAuth();
   }
   updateScreenWidth = () => {
     this.setState({ screenWidth: window.innerWidth });
@@ -152,29 +152,28 @@ class Home extends Component {
     console.log("hi");
   };
 
-  // handleScroll = () => {
-  //   if (this.scroller) {
-  //     console.log(this.scroller.getBoundingClientRect().x);
-  //     if (
-  //       this.scroller.scrollTop >= 590 &&
-  //       !this.state.isLoading &&
-  //       this.state.count == true
-  //     ) {
-  //       this.handleMoreData();
-  //     }
-  //   }
-  // };
   handleScrolls = e => {
     let element = e.target;
     if (
       element.scrollHeight - element.scrollTop === element.clientHeight &&
       !this.state.isLoading &&
+      this.state.dataAvailable &&
       this.state.count == true
     ) {
       // do something at end of scroll
       console.log("mongo");
 
       this.handleMoreData();
+    }
+  };
+  // COMING BACK TO YOU
+  handleUserAuth = () => {
+    const { handleAuth, authenticated } = this.context;
+    handleAuth();
+    if (authenticated) {
+      console.log("user auth");
+    } else {
+      console.log("coming there yet");
     }
   };
   render() {
@@ -192,7 +191,7 @@ class Home extends Component {
           {value => (value.visible ? <AppBar /> : null)}
         </AppBarConsumer>
         <AuthConsumer>
-          {value => (value.authenticated ? <h2>hmmmm</h2> : null)}
+          {value => (value.authenticated ? null : null)}
         </AuthConsumer>
 
         <div
@@ -448,22 +447,6 @@ class Home extends Component {
                             </Grid>
                           );
                         })}
-
-                    {/* <Grid item md={4} sm={4} xs={6}>
-                      <ProductCard image={pic4}></ProductCard>
-                    </Grid>
-                    <Grid item md={4} sm={4} xs={6}>
-                      <ProductCard image={pic5}></ProductCard>
-                    </Grid>
-                    <Grid item md={4} sm={4} xs={6}>
-                      <ProductCard image={pic6}></ProductCard>
-                    </Grid>
-                    <Grid item md={4} sm={4} xs={6}>
-                      <ProductCard image={pic7}></ProductCard>
-                    </Grid>
-                    <Grid item md={4} sm={4} xs={6}>
-                      <ProductCard image={pic8}></ProductCard>
-                    </Grid> */}
 
                     {/* Lazy load */}
                   </Grid>{" "}

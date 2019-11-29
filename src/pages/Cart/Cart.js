@@ -52,11 +52,6 @@ class Cart extends Component {
           () => {
             //console.log("call the function here");
             this.calculateTotal();
-            toast.notify("Wellcome to your cart", {
-              position: "bottom",
-              color: "blue",
-              duration: 1000
-            });
           }
         );
         console.log(this.state.item);

@@ -143,7 +143,7 @@ export default function PaperSheet({
               <IconButton
                 className={classes.button}
                 onClick={() => handleDecrease(itemId)}
-                disabled={isLoading}
+                disabled={isLoading || quantity <= 1}
                 aria-label="delete"
               >
                 <ExpandMore />

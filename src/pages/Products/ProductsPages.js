@@ -39,11 +39,10 @@ class ProductsPage extends Component {
     window.removeEventListener("resize", this.handleScroll);
     window.removeEventListener("scroll", this.handleMoreData);
   }
-
   handleData = () => {
     Axios.get(
-      ` https://europe-west1-easy-shop-53cc2.cloudfunctions.net/api/products/category/${this.props.match.params.slug}
-    `
+      ` https://europe-west1-easy-shop-53cc2.cloudfunctions.net/api/products/categorys/${this.props.match.params.slug}
+        `
     )
       .then(doc => {
         this.setState(
@@ -67,7 +66,6 @@ class ProductsPage extends Component {
         });
       });
   };
-
   ///Handling more data
   handleMoreData = () => {
     this.setState({

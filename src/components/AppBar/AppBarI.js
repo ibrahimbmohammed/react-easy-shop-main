@@ -13,7 +13,15 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 const useStyles = makeStyles(theme => ({
   ...theme1,
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    display: "flex",
+    justifyContent: "space-between"
+  },
+  root2: {
+    transform: "translateX(150px)",
+    "@media (min-width: 768px)": {
+      transform: "translateX(650px)"
+    }
   },
   Navhead: {
     borderRadius: "0px 0px 15px 15px"
@@ -94,7 +102,7 @@ export default function SearchAppBar() {
             </Typography>
             {/* <IconButton
               edge="start"
-              className={classes.menuButton}
+              className={classes.menuBtton}
               color="inherit"
               aria-label="open drawer"
             >
@@ -103,7 +111,7 @@ export default function SearchAppBar() {
             {/* <Typography className={classes.title} variant="h6" noWrap>
               Easy Shop
             </Typography> */}
-            <div className={classes.search}>
+            {/* <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
@@ -115,7 +123,7 @@ export default function SearchAppBar() {
                 }}
                 inputProps={{ "aria-label": "search" }}
               />
-            </div>{" "}
+            </div>{" "} */}
           </Toolbar>
           <IconButton
             aria-label="account of current user"
@@ -124,8 +132,9 @@ export default function SearchAppBar() {
             // onClick={handleMenu}
             color="inherit"
           >
-            <AccountCircle />
-          </IconButton>
+            {" "}
+            <AccountCircle className={classes.root2}></AccountCircle>
+          </IconButton>{" "}
         </Toolbar>
       </AppBar>
     </div>

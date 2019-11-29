@@ -192,7 +192,7 @@ class SingleProduct extends Component {
                   component="h2"
                 >
                   {/* <WhatsApp onClick={this.handleWhatsApp} />  */}
-                  <ModalI />
+                  <ModalI image_url={image_url} />
                   <Share />
                 </Typography>
               </Grid>

@@ -16,6 +16,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1
   },
+  Navhead: {
+    borderRadius: "0px 0px 15px 15px"
+  },
   menuButton: {
     marginRight: theme.spacing(2)
   },
@@ -44,7 +47,7 @@ export default function MenuAppBar() {
 
   return (
     <div className={classes.root}>
-      <FormGroup>
+      {/* <FormGroup>
         <FormControlLabel
           control={
             <Switch
@@ -55,8 +58,8 @@ export default function MenuAppBar() {
           }
           label={auth ? "Logout" : "Login"}
         />
-      </FormGroup>
-      <AppBar position="static">
+      </FormGroup> */}
+      <AppBar position="static" className={classes.Navhead}>
         <Toolbar>
           <IconButton
             edge="start"
