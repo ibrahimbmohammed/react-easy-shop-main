@@ -23,7 +23,7 @@
     "react-skylight": "^0.5.1",
     "react-spinners-css": "^1.1.2",
     "react-spring": "^8.0.27",
-    "react-stripe-checkout": "2.6.3",
+    "react-stripe-checkout": "^2.6.3",
     "react-swipe": "^6.0.4",
     "react-toastify": "^5.4.0",
     "styled-components": "^4.4.0",

@@ -124,7 +124,7 @@ class ProductsPage extends Component {
     if (
       element.scrollHeight - element.scrollTop === element.clientHeight &&
       !this.state.isLoading &&
-      this.state.count == true
+      this.state.dataAvailable
     ) {
       // do something at end of scroll
       console.log("mongo");

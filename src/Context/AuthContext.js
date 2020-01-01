@@ -28,12 +28,15 @@ class AuthProvider extends Component {
       }
     }
   };
-
+handleLogout=()=>{
+  localStorage.clear();
+  window.location.href = "/signIn";
+}
   render() {
     return (
       <>
         <AuthContext.Provider
-          value={{ ...this.state, handleAuth: this.handleAuth }}
+          value={{ ...this.state, handleAuth: this.handleAuth, handleLogout:this.handleLogout}}
         >
           {this.props.children}
         </AuthContext.Provider>

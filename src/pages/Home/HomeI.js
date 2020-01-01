@@ -50,7 +50,6 @@ class Home extends Component {
   componentDidMount() {
     window.addEventListener("resize", this.updateScreenWidth);
     this.handleData();
-    this.handleUserAuth();
   }
   updateScreenWidth = () => {
     this.setState({ screenWidth: window.innerWidth });
@@ -157,8 +156,7 @@ class Home extends Component {
     if (
       element.scrollHeight - element.scrollTop === element.clientHeight &&
       !this.state.isLoading &&
-      this.state.dataAvailable &&
-      this.state.count == true
+      this.state.dataAvailable
     ) {
       // do something at end of scroll
       console.log("mongo");
@@ -167,15 +165,7 @@ class Home extends Component {
     }
   };
   // COMING BACK TO YOU
-  handleUserAuth = () => {
-    const { handleAuth, authenticated } = this.context;
-    handleAuth();
-    if (authenticated) {
-      console.log("user auth");
-    } else {
-      console.log("coming there yet");
-    }
-  };
+
   render() {
     const { classes } = this.props;
     // const { visible } = this.context;

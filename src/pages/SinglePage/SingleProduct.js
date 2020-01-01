@@ -236,29 +236,9 @@ class SingleProduct extends Component {
             {/* </Paper> */}
           </Grid>
 
-          {/* Similar Products */}
-          <Grid item xs={12}>
-            <Container>
-              <Typography
-                className={classes.price}
-                gutterBottom
-                variant="h6"
-                component="h6"
-              >
-                Similar Products:
-              </Typography>
-            </Container>
-            {/* <Paper className={classes.similarProd}> */}
-            <Container>
-              {" "}
-              <SimilarProduct tileData={tileData} image={pic4} />
-            </Container>
-
-            {/* </Paper> */}
-          </Grid>
           {/* Payment Details */}
           <Grid item xs={12}>
-            <Paper>
+            <Paper className={classes.paydetails}>
               {" "}
               <Container>
                 <Typography
@@ -276,13 +256,13 @@ class SingleProduct extends Component {
                   variant="p"
                   component="h5"
                 >
-                  Currently easy shop utilisies its existing whatsapp platform
-                  for processing payment and inquiries,by clicking the Buy
+                  Easy shop utilisies its existing whatsapp platform for
+                  processing payment and inquiries,by clicking the WhatsApp
                   button the items you requested would be forwared to easyshops
-                  whatsapp number where your request would immediatly responded
-                  to, payment and shipment details would be commuinicated to
-                  you,the method above is to help build trust between new
-                  custormers and helps filter customers.
+                  whatsapp number where your request would be immediatly
+                  responded to, payment and shipment details would be
+                  commuinicated to you,you could also use your visa card or
+                  master card to pay directly buy pressing the buy button.
                 </Typography>
               </Container>
             </Paper>

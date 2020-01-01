@@ -54,6 +54,9 @@ const styles = {
       marginTop: 30,
       padding: 15
     }
+  },
+  paydetails: {
+    marginTop: 30
   }
 };
 

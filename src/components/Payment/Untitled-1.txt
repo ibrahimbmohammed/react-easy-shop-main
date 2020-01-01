@@ -1,0 +1,29 @@
+
+   <form >
+		 <script src="http://www.remitademo.net/payment/v1/remita-pay-inline.bundle.js"></script>
+		<button type="button" onclick="makePayment()"> Pay </button>
+			</form>
+				<script>
+					function makePayment() {
+					  var paymentEngine = RmPaymentEngine.init({
+					     key: ‘public key’',
+					      customerId: "140700251",
+					      firstName: "Lisa",
+					      lastName: "Spark",
+					      email: "demo@remita.net",
+					      narration: "Payment Description",
+					      amount: 19999,
+					      onSuccess: function (response) {
+					      console.log('callback Successful Response', response);
+					      },
+					      onError: function (response) {
+					      console.log('callback Error Response', response);
+					      },
+					      onClose: function () {
+					      console.log("closed");
+					      }
+					      });
+					      paymentEngine.showPaymentWidget();
+					    }
+					</script>
+   
