@@ -9,12 +9,18 @@ import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
 import { AppBarContext } from "../../Context/AppBarContext";
 import AppBar from "../../components/AppBar/AppBarII";
-import pic1 from "../../images/lacenoback3collloor.png";
-import pic1a from "../../images/final.png";
-import pic2 from "../../images/minified (2).jpg";
+import pic1 from "../../images/lacenoback3collloor.jpg";
+import pic1a from "../../images/minfied.jpeg";
+import pic1b from "../../images/minified.jpg";
+import pic2 from "../../images/final.jpg";
 import pic3 from "../../images/minified (3).jpg";
 import pic4 from "../../images/minified (4).jpg";
 import pic7 from "../../images/minified (5).jpg";
+import pic5 from "../../images/minified (2).jpg";
+import pic8 from "../../images/minified (6).jpg";
+import pic9 from "../../images/minified (7).jpg";
+import pic10 from "../../images/minified (8).jpg";
+import pic11 from "../../images/minified (10).jpg";
 class Category extends Component {
   constructor(props) {
     super(props);
@@ -26,20 +32,20 @@ class Category extends Component {
     if (data == "Lace") {
       return [
         // { name: "All Lace", pic: pic1 },
-        { name: "Swiss Lace", pic: pic2 },
-        { name: "Voile Lace", pic: pic3 },
-        { name: "Lace", pic: pic4 }
+        { name: "Swiss Lace", pic: pic1a },
+        { name: "Voile Lace", pic: pic5 },
+        { name: "Lace", pic: pic1b }
       ];
     }
     return [
       // { name: "All Ankara", pic: pic1a },
-      { name: "Chiganvy", pic: pic2 },
-      { name: "Dominion", pic: pic3 },
-      { name: "Holland Wax", pic: pic4 },
-      { name: "Aunty K", pic: pic7 },
-      { name: "Bimraj", pic: pic3 },
-      { name: "Delight", pic: pic2 },
-      { name: "Others", pic: pic4 }
+      { name: "Chiganvy", pic: pic4 },
+      { name: "Dominion", pic: pic7 },
+      { name: "Holland Wax", pic: pic8 },
+      { name: "Aunty K", pic: pic9 },
+      { name: "Bimraj", pic: pic8 },
+      { name: "Delight", pic: pic10 },
+      { name: "Others", pic: pic11 }
     ];
   };
 
