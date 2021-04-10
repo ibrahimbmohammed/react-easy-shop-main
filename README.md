@@ -1,2 +1,2 @@
-# https://easyshopme.netlify.app
+# React App
 
